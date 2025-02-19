@@ -1,4 +1,4 @@
-from utils import load_data, load_template, adicionar_anotacao
+from utils import *
 from flask import request, jsonify
 
 def index():
@@ -21,3 +21,5 @@ def submit(titulo, detalhes):
     adicionar_anotacao(titulo, detalhes)
 
     return jsonify({'mensagem': 'Anotação adicionada com sucesso!'}), 201
+
+
