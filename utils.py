@@ -17,15 +17,30 @@ def init_db():
 def load_data():
     conn = sqlite3.connect("notes.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT titulo, detalhes FROM notes")
-    notas = [{"titulo": row[0], "detalhes": row[1]} for row in cursor.fetchall()]
+    cursor.execute("SELECT id, titulo, detalhes FROM notes")
+    notas = [{"id": row[0], "titulo": row[1], "detalhes": row[2]} for row in cursor.fetchall()]
     conn.close()
     return notas
+
 
 def adicionar_anotacao(titulo, detalhes):
     conn = sqlite3.connect("notes.db")
     cursor = conn.cursor()
     cursor.execute("INSERT INTO notes (titulo, detalhes) VALUES (?, ?)", (titulo, detalhes))
+    conn.commit()
+    conn.close()
+
+def remover_anotacao(note_id):
+    conn = sqlite3.connect("notes.db")
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM notes WHERE id = ?", (note_id,))
+    conn.commit()
+    conn.close()
+
+def atualizar_anotacao(note_id, titulo, detalhes):
+    conn = sqlite3.connect("notes.db")
+    cursor = conn.cursor()
+    cursor.execute("UPDATE notes SET titulo = ?, detalhes = ? WHERE id = ?", (titulo, detalhes, note_id))
     conn.commit()
     conn.close()
 

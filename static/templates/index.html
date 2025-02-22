@@ -1,13 +1,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Get-it</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/getit.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/getit.css') }}">
 </head>
 <body>
-
-    <img src="static\img\logo-getit.png">
+    <img src="static/img/logo-getit.png">
     <p>Como o Post-it, mas com outro verbo</p>
-
     <form action="/submit" method="POST">
         <label for="titulo">Título</label>
         <input id="titulo" type="text" name="titulo" />
@@ -15,11 +13,8 @@
         <input id="detalhes" name="detalhes" />
         <input type="submit" />
     </form>
-
-    <ul>
+    <ul id="notes-list">
         {notes}
     </ul>
-
     <script src="{{ url_for('static', filename='js/getit.js') }}"></script>
-
 </body>
