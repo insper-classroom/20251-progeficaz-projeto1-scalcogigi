@@ -1,4 +1,4 @@
-from utils import *
+from utils import load_data, load_template, adicionar_anotacao, delete_note
 from flask import request, jsonify
 
 def index():
@@ -16,15 +16,8 @@ def index():
 
     return load_template('index.html').format(notes=notes)
 
-
 def submit(titulo, detalhes):
-    if not titulo or not detalhes:
-        return jsonify({'mensagem': 'Título e detalhes são obrigatórios.'}), 400
     adicionar_anotacao(titulo, detalhes)
-    return jsonify({'mensagem': 'Anotação adicionada com sucesso!'}), 201
 
-def delete_note(note_id):
-    remover_anotacao(note_id)
-
-def edit_note(note_id, titulo, detalhes):
-    atualizar_anotacao(note_id, titulo, detalhes)
+def deletar_notas(id):
+    delete_note(id)
