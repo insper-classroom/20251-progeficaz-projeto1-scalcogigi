@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get-it</title>
-    <link rel="stylesheet" href="static\templates\css\getit.css">
+  <meta charset="UTF-8">
+  <title>Get-it</title>
+  <link rel="stylesheet" href="static/templates/css/getit.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Minhas Notas</h1>
-        <ul class="notes-list">
-            {% for note in notes %}
-                {% if note.id is not none %}
-                <li class="note">
-                    <h3>{{ note.titulo }}</h3>
-                    <p class="details">{{ note.detalhes }}</p>
-                    <button onclick="event.stopPropagation(); deleteNote({{ note.id }})" class="delete-btn">Deletar</button>
-                    <button onclick="editNote({{ note.id }})" class="edit-btn">Editar</button>
-                </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-        <button onclick="window.location.href='/new_note'">Adicionar Nota</button>
-    </div>
-
-    <script src="{{ url_for('static', filename='js/getit.js') }}"></script>
+  <ul class="notes-list">
+    <li data-id="{note_id}">
+      <h3>{title}</h3>
+      <p>{details}</p>
+      <a href="#" onclick="deleteNote({note_id}); return false;">Deletar</a> <!-- Alterado -->
+      <a href="/edit_note/{note_id}">Editar</a>
+    </li>
+  </ul>
 </body>
-</html>

@@ -16,6 +16,19 @@ function editNote(element) {
 }
 
 function deleteNote(noteId) {
-    fetch(`/delete_note/${noteId}`, {method: 'POST'})
-        .then(() => location.reload());
+    console.log("Tentando excluir a nota com ID:", noteId); // Verifica se a função é chamada
+    fetch(`/delete_note/${noteId}`, {
+        method: 'POST',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert(data.mensagem); // Exibe a mensagem de sucesso
+        document.querySelector(`li[data-id='${noteId}']`).remove(); // Remove o item da lista
+    })
+    .catch(error => console.error('Erro ao excluir a nota:', error));
 }

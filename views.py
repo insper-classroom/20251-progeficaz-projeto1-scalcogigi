@@ -14,9 +14,8 @@ def index():
     ]
     notes = '\n'.join(notes_li)
 
-    # print(notes)
-
     return load_template('index.html').format(notes=notes)
+
 
 def submit(titulo, detalhes):
     if not titulo or not detalhes:

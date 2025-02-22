@@ -21,12 +21,14 @@ def submit_form():
 
 @app.route('/delete_note/<int:note_id>', methods=['POST'])
 def delete_note(note_id):
+    print(f"Recebido pedido para excluir a nota com ID: {note_id}")
     conn = sqlite3.connect("notes.db")
     cursor = conn.cursor()
     cursor.execute("DELETE FROM notes WHERE id = ?", (note_id,))
     conn.commit()
     conn.close()
     return jsonify({'mensagem': 'Anotação deletada com sucesso!'})
+
 
 @app.route('/edit_note/<int:note_id>', methods=['POST'])
 def edit_note(note_id):
